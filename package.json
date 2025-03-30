@@ -1,0 +1,24 @@
+{
+  "name": "anki-mcp",
+  "version": "0.1.0",
+  "description": "MCP server for AnkiConnect integration",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "mcp",
+    "anki",
+    "ankiconnect",
+    "ai",
+    "claude"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.8.0",
+    "node-fetch": "^3.3.0"
+  }
+}
