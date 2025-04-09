@@ -1,3 +1,56 @@
+import { ErrorCode, McpError } from "@modelcontextprotocol/sdk/types.js";
+import fetch from 'node-fetch';
+
+
+// AnkiConnect API endpoint
+const ANKI_CONNECT_URL = 'http://127.0.0.1:8765';
+
+/**
+ * Invokes an AnkiConnect action
+ * @param {string} action - The action to perform
+ * @param {object} params - The parameters for the action
+ * @param {number} version - The AnkiConnect API version (default: 6)
+ * @returns {Promise<any>} - The result of the action
+ */
+export async function invokeAnkiConnect(action, params = {}, version = 6) {
+  try {
+    const response = await fetch(ANKI_CONNECT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        action,
+        version,
+        params
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+
+    if (!data.hasOwnProperty('error')) {
+      throw new Error('Response is missing required error field');
+    }
+
+    if (!data.hasOwnProperty('result')) {
+      throw new Error('Response is missing required result field');
+    }
+
+    if (data.error) {
+      throw new Error(data.error);
+    }
+
+    return data.result;
+  } catch (error) {
+    console.error(`AnkiConnect error: ${error.message}`);
+    throw error;
+  }
+}
+
 // Handle the replaceTags tool
 export async function handleReplaceTags(arguments_) {
   console.error("Processing replaceTags tool");
@@ -2376,56 +2429,6 @@ export async function handleGuiDeckOverview(arguments_) {
       }
     ]
   };
-}import { ErrorCode, McpError } from "@modelcontextprotocol/sdk/types.js";
-import fetch from 'node-fetch';
-
-// AnkiConnect API endpoint
-const ANKI_CONNECT_URL = 'http://127.0.0.1:8765';
-
-/**
- * Invokes an AnkiConnect action
- * @param {string} action - The action to perform
- * @param {object} params - The parameters for the action
- * @param {number} version - The AnkiConnect API version (default: 6)
- * @returns {Promise<any>} - The result of the action
- */
-export async function invokeAnkiConnect(action, params = {}, version = 6) {
-  try {
-    const response = await fetch(ANKI_CONNECT_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        action,
-        version,
-        params
-      })
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP error! Status: ${response.status}`);
-    }
-
-    const data = await response.json();
-    
-    if (!data.hasOwnProperty('error')) {
-      throw new Error('Response is missing required error field');
-    }
-    
-    if (!data.hasOwnProperty('result')) {
-      throw new Error('Response is missing required result field');
-    }
-    
-    if (data.error) {
-      throw new Error(data.error);
-    }
-    
-    return data.result;
-  } catch (error) {
-    console.error(`AnkiConnect error: ${error.message}`);
-    throw error;
-  }
 }
 
 //=============================================
@@ -4935,7 +4938,7 @@ export const getTools = () => {
     RELEARN_CARDS_TOOL,
     ANSWER_CARDS_TOOL,
     SET_DUE_DATE_TOOL,
-    
+
     // Deck operations
     GET_DECK_NAMES_TOOL,
     CREATE_DECK_TOOL,
@@ -4949,7 +4952,7 @@ export const getTools = () => {
     CLONE_DECK_CONFIG_ID_TOOL,
     REMOVE_DECK_CONFIG_ID_TOOL,
     GET_DECK_STATS_TOOL,
-    
+
     // Model operations
     MODEL_NAMES_TOOL,
     MODEL_NAMES_AND_IDS_TOOL,
@@ -4976,7 +4979,7 @@ export const getTools = () => {
     MODEL_FIELD_SET_FONT_SIZE_TOOL,
     MODEL_FIELD_SET_DESCRIPTION_TOOL,
     CREATE_MODEL_TOOL,
-    
+
     // Note operations
     ADD_NOTE_TOOL,
     ADD_NOTES_TOOL,
@@ -4990,7 +4993,7 @@ export const getTools = () => {
     UPDATE_NOTE_MODEL_TOOL,
     DELETE_NOTES_TOOL,
     REMOVE_EMPTY_NOTES_TOOL,
-    
+
     // Tag operations
     GET_TAGS_TOOL,
     UPDATE_NOTE_TAGS_TOOL,
@@ -5000,14 +5003,14 @@ export const getTools = () => {
     CLEAR_UNUSED_TAGS_TOOL,
     REPLACE_TAGS_TOOL,
     REPLACE_TAGS_IN_ALL_NOTES_TOOL,
-    
+
     // Media operations
     STORE_MEDIA_FILE_TOOL,
     RETRIEVE_MEDIA_FILE_TOOL,
     GET_MEDIA_FILES_NAMES_TOOL,
     GET_MEDIA_DIR_PATH_TOOL,
     DELETE_MEDIA_FILE_TOOL,
-    
+
     // GUI operations
     GUI_BROWSE_TOOL,
     GUI_SELECT_CARD_TOOL,
@@ -5026,7 +5029,7 @@ export const getTools = () => {
     GUI_IMPORT_FILE_TOOL,
     GUI_EXIT_ANKI_TOOL,
     GUI_CHECK_DATABASE_TOOL,
-    
+
     // Stats operations
     GET_NUM_CARDS_REVIEWED_TODAY_TOOL,
     GET_NUM_CARDS_REVIEWED_BY_DAY_TOOL,
@@ -5035,7 +5038,7 @@ export const getTools = () => {
     GET_REVIEWS_OF_CARDS_TOOL,
     GET_LATEST_REVIEW_ID_TOOL,
     INSERT_REVIEWS_TOOL,
-    
+
     // System operations
     REQUEST_PERMISSION_TOOL,
     VERSION_TOOL,

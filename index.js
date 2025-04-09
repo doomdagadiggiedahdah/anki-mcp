@@ -8,11 +8,12 @@ import {
 } from "@modelcontextprotocol/sdk/types.js";
 import { getTools, handleToolCall } from './tools.js';
 
+
 // Initialize the MCP server
 const server = new Server(
   { 
     name: "anki-connect-server", 
-    version: "0.1.0" 
+    version: "1.0.0" 
   }, 
   { 
     capabilities: { 
@@ -26,7 +27,6 @@ console.error("Starting AnkiConnect MCP server...");
 
 // Handle the ListTools request
 server.setRequestHandler(ListToolsRequestSchema, async () => {
-  console.error("ListTools request received");
   return {
     tools: getTools()
   };
@@ -35,14 +35,14 @@ server.setRequestHandler(ListToolsRequestSchema, async () => {
 // Handle the CallTool request
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   console.error(`CallTool request received: ${JSON.stringify(request.params)}`);
-  
+
   try {
     return await handleToolCall(request.params.name, request.params.arguments);
   } catch (error) {
     if (error instanceof McpError) {
       throw error;
     }
-    
+
     console.error(`Error processing tool: ${error.message}`);
     return {
       content: [
