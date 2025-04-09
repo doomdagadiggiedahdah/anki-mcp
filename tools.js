@@ -405,7 +405,9 @@ export async function handleGuiCheckDatabase() {
       }
     ]
   };
-}// Handle the getReviewsOfCards tool
+}
+
+// Handle the getReviewsOfCards tool
 export async function handleGetReviewsOfCards(arguments_) {
   console.error("Processing getReviewsOfCards tool");
   
@@ -517,7 +519,9 @@ export async function handleRemoveDeckConfigId(arguments_) {
       }
     ]
   };
-}// Handle the canAddNotes tool
+}
+
+// Handle the canAddNotes tool
 export async function handleCanAddNotes(arguments_) {
   console.error("Processing canAddNotes tool");
   
@@ -623,7 +627,9 @@ export async function handleRemoveEmptyNotes() {
       }
     ]
   };
-}// Handle the modelFieldRename tool
+}
+
+// Handle the modelFieldRename tool
 export async function handleModelFieldRename(arguments_) {
   console.error("Processing modelFieldRename tool");
   
@@ -1175,7 +1181,9 @@ export const RELOAD_COLLECTION_TOOL = {
     properties: {},
     required: []
   }
-};//=============================================
+};
+
+//=============================================
 // REMAINING GUI OPERATIONS
 //=============================================
 
@@ -1268,7 +1276,9 @@ export const GUI_CHECK_DATABASE_TOOL = {
     properties: {},
     required: []
   }
-};//=============================================
+};
+
+//=============================================
 // REVIEWS OPERATIONS
 //=============================================
 
@@ -1369,7 +1379,9 @@ export const REMOVE_DECK_CONFIG_ID_TOOL = {
     },
     required: ["configId"]
   }
-};//=============================================
+};
+
+//=============================================
 // NOTE VALIDATION OPERATIONS
 //=============================================
 
@@ -1682,7 +1694,9 @@ export const MODEL_FIELD_SET_DESCRIPTION_TOOL = {
     },
     required: ["modelName", "fieldName", "description"]
   }
-};//=============================================
+};
+
+//=============================================
 // MODEL FIELD OPERATIONS
 //=============================================
 
@@ -1977,7 +1991,9 @@ export async function handleCardReviews(arguments_) {
       }
     ]
   };
-}//=============================================
+}
+
+//=============================================
 // STATS & REVIEW HISTORY
 //=============================================
 
@@ -2172,7 +2188,9 @@ export async function handleCreateModel(arguments_) {
       }
     ]
   };
-}//=============================================
+}
+
+//=============================================
 // MODEL TEMPLATE OPERATIONS
 //=============================================
 
@@ -2311,7 +2329,9 @@ export const CREATE_MODEL_TOOL = {
     },
     required: ["modelName", "inOrderFields", "cardTemplates"]
   }
-};// Handle the guiCurrentCard tool
+};
+
+// Handle the guiCurrentCard tool
 export async function handleGuiCurrentCard() {
   console.error("Processing guiCurrentCard tool");
   
