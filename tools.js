@@ -21,8 +21,8 @@ export async function invokeAnkiConnect(action, params = {}, version = 6) {
       },
       body: JSON.stringify({
         action,
-        version,
-        params
+        params,
+        version
       })
     });
 
@@ -108,7 +108,9 @@ export async function handleReplaceTagsInAllNotes(arguments_) {
       }
     ]
   };
-}// Define the replaceTags tool
+}
+
+// Define the replaceTags tool
 export const REPLACE_TAGS_TOOL = {
   name: "replaceTags",
   description: "Replace tags in notes by note ID.",
@@ -1075,7 +1077,9 @@ export async function handleModelTemplateRemove(arguments_) {
       }
     ]
   };
-}//=============================================
+}
+
+//=============================================
 // SYSTEM OPERATIONS
 //=============================================
 
@@ -1532,7 +1536,9 @@ export const REMOVE_EMPTY_NOTES_TOOL = {
     properties: {},
     required: []
   }
-};// Define the modelFieldRename tool
+};
+
+// Define the modelFieldRename tool
 export const MODEL_FIELD_RENAME_TOOL = {
   name: "modelFieldRename",
   description: "Rename the field name of a given model.",
